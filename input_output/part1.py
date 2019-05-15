@@ -20,7 +20,7 @@ services = {
     'Oil change': 35.00,
     'Tire rotation': 19.00,
     'Car wash': 7.00,
-    'Car wax': 12.00,
+    'Car wax': 12.00
 }
 
 
@@ -58,7 +58,7 @@ def service_input(dict:services, prompts=2) -> list:
         # Uses the ordinal method to convert num to ordinal (e.g. 1 -> 1st)
         # Uses the number_to_words method to convert the ordinal to word (e.g. 1st -> first)
         # The while loop ensures the user enters a valid service from the services dict
-        # Future versions could enhance this funciton using case conversion 
+        # Future versions could enhance this function using case conversion 
         # To render the input-to-dict match case insensitive
         valid_entry = False
         while(not valid_entry):
