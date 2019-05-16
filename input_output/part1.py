@@ -6,7 +6,7 @@
 import inflect
 
 # Create an ordinal variable to convert each service_input loop iteration's 
-# int representation into its word representation 
+# int representation into its word representation for readability 
 # for the service selection output to the user
 ordinal = inflect.engine()
 
@@ -26,12 +26,13 @@ services = {
 
 # Loop through the dict of services to output a menu of automotive services
 # and the corresponding cost of each service
-# The dict can be modified, this loop will not need to change
-# and will always reflect the current dict key:value pairs
+# A loop is used becasue the dict parameter can be modified
+# With dict modification, this loop will not need to change
+# and will always reflect the current key:value pairs
 
 def service_menu(dict:services) -> str:
     '''
-    Return interpolated strings for key:value pairs.
+    Print interpolated strings for key:value pairs.
 
     Keyword arguments:
     services -- a non-empty dictionary with float or int key values
@@ -40,10 +41,10 @@ def service_menu(dict:services) -> str:
     for key, value in services.items():
         print('%s -- $%d' % (key, value))
 
-# Prompt the user for two services from the menu
+# Prompt the user for services from the menu
 # A loop is used so the code can be easily modified
-# To prompt for more or less than two services as needed
-# in future versions 
+# To prompt for more or less services as needed in future versions 
+# The default is to prompt for input twice
 
 def service_input(dict:services, prompts=2) -> list:
     '''
@@ -51,7 +52,7 @@ def service_input(dict:services, prompts=2) -> list:
 
     Keyword arguments:
     services -- a non-empty dictionary
-    prompts -- int for number of iterations (default 2)
+    prompts -- int for number of loop iterations (default 2)
 
     '''
     # Create an empty list to store loop iteration values
@@ -60,8 +61,8 @@ def service_input(dict:services, prompts=2) -> list:
     for num in range(1, (prompts + 1)):
         # Uses the ordinal method to convert num to ordinal (e.g. 1 -> 1st)
         # Uses the number_to_words method to convert the ordinal to word (e.g. 1st -> first)
-        # The while loop ensures the user enters a valid service from the services dict
-        # Future versions could enhance this function using case conversion 
+        # The while loop ensures the user enters a valid service from the service menu.
+        # Future versions could enhance this validation using case conversion 
         # To render the input-to-dict match case insensitive
         valid_entry = False
         while(not valid_entry):
@@ -78,10 +79,9 @@ def service_input(dict:services, prompts=2) -> list:
     return services_ordered
 
 # Loop thorugh the list of services ordered and output the service and price
-
 def service_output(list, dict:services) -> str:
     '''
-    Return interpolated strings for list elements
+    Print interpolated strings for list elements
 
     Keyword arguments:
     list -- a non-empty list
@@ -95,17 +95,18 @@ def service_output(list, dict:services) -> str:
             print('Service %d: %s, $%d' % ((num + 1), list[num], services[list[num]]))
 
 # Print the total cost of the services selected
-
 def invoice_total(list, dict:services) -> str:
     '''
-    Return interpolated string for dictionary value sum
+    Print an interpolated string for dictionary value sum
 
     Keyword arguments:
     list -- a non-empty list
     services -- a non empty dictionary with float key values
 
     '''
+    # initialize summation variable
     total = 0
+
     for num in range(0, len(list)):
         if (list[num] == 'No service'):
             continue
@@ -115,7 +116,6 @@ def invoice_total(list, dict:services) -> str:
 
 # Only execute if this is the main script run 
 # and script is not imported by another module
-
 if __name__ == "__main__":
     service_menu(services)
     selected_services = service_input(services, 2)
