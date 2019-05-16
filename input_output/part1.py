@@ -13,8 +13,9 @@ ordinal = inflect.engine()
 # A dict type is the best data type for services.  
 # It yields an associative relationship between service and price.
 # It allows for changing prices and adding services, as dicts are mutable.
-# Floats are used for the dict values
+# Floats are used for the dict values as
 # they are the best data type for representing prices
+# the dict below uses multiple lines and white space for readability
 
 services = {
     'Oil change': 35.00,
@@ -23,33 +24,35 @@ services = {
     'Car wax': 12.00
 }
 
-
 # Loop through the dict of services to output a menu of automotive services
 # and the corresponding cost of each service
 # The dict can be modified, this loop will not need to change
-# and will always reflects the current dict
+# and will always reflect the current dict key:value pairs
 
 def service_menu(dict:services) -> str:
     '''
-    TODO: Shore this up
-    This function takes a dictionary as input and 
-    returns a string for each key:value pair.
-    The key and value are interpolated into the string output.
+    Return interpolated strings for key:value pairs.
+
+    Keyword arguments:
+    services -- a non-empty dictionary with float or int key values
     '''
+
     for key, value in services.items():
         print('%s -- $%d' % (key, value))
 
 # Prompt the user for two services from the menu
 # A loop is used so the code can be easily modified
-# To prompt for more or less services as needed 
+# To prompt for more or less than two services as needed
+# in future versions 
 
 def service_input(dict:services, prompts=2) -> list:
     '''
-    TODO: Docstring
-    This function takes an int num as input and
-    iterates num times prompting the user for a desired service.
-    Num is converted to its ordinal in the prompt 
-    by way of the inflect engine during each iteration
+    Return a list of user input elements.
+
+    Keyword arguments:
+    services -- a non-empty dictionary
+    prompts -- int for number of iterations (default 2)
+
     '''
     # Create an empty list to store loop iteration values
     services_ordered = []
@@ -78,7 +81,12 @@ def service_input(dict:services, prompts=2) -> list:
 
 def service_output(list, dict:services) -> str:
     '''
-    TODO: Docstring
+    Return interpolated strings for list elements
+
+    Keyword arguments:
+    list -- a non-empty list
+    services -- a non-empty dictionary with float key values
+
     '''
     for num in range(0, len(list)):
         if (list[num] == 'No service'):
@@ -90,7 +98,12 @@ def service_output(list, dict:services) -> str:
 
 def invoice_total(list, dict:services) -> str:
     '''
-    TODO: Docstring
+    Return interpolated string for dictionary value sum
+
+    Keyword arguments:
+    list -- a non-empty list
+    services -- a non empty dictionary with float key values
+
     '''
     total = 0
     for num in range(0, len(list)):
