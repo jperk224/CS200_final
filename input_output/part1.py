@@ -30,7 +30,7 @@ services = {
 # With dict modification, this loop will not need to change
 # and will always reflect the current key:value pairs
 
-def service_menu(dict:services) -> str:
+def service_menu(services:dict) -> str:
     '''
     Print interpolated strings for key:value pairs.
 
@@ -46,7 +46,7 @@ def service_menu(dict:services) -> str:
 # To prompt for more or less services as needed in future versions 
 # The default is to prompt for input twice
 
-def service_input(dict:services, prompts=2) -> list:
+def service_input(services:dict, prompts:int=2) -> list:
     '''
     Return a list of user input elements.
 
@@ -79,7 +79,7 @@ def service_input(dict:services, prompts=2) -> list:
     return services_ordered
 
 # Loop thorugh the list of services ordered and output the service and price
-def service_output(list, dict:services) -> str:
+def service_output(list:list, services:dict) -> str:
     '''
     Print interpolated strings for list elements
 
@@ -95,7 +95,7 @@ def service_output(list, dict:services) -> str:
             print('Service %d: %s, $%d' % ((num + 1), list[num], services[list[num]]))
 
 # Print the total cost of the services selected
-def invoice_total(list, dict:services) -> str:
+def invoice_total(list:list, services:dict) -> str:
     '''
     Print an interpolated string for dictionary value sum
 
@@ -119,6 +119,6 @@ def invoice_total(list, dict:services) -> str:
 if __name__ == "__main__":
     service_menu(services)
     selected_services = service_input(services, 2)
-    print('Davy\'s auto shop invoice\n')
+    print('\nDavy\'s auto shop invoice\n')
     service_output(selected_services, services)
     invoice_total(selected_services, services)
