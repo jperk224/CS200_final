@@ -35,7 +35,7 @@ def service_menu(services:dict) -> str:
     Print interpolated strings for key:value pairs.
 
     Keyword arguments:
-    services -- a non-empty dictionary with float or int key values
+    services -- a non-empty dictionary with float or int values
     '''
 
     for key, value in services.items():
