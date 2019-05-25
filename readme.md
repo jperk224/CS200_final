@@ -6,4 +6,6 @@ A collection of project activities
 Automobile Service Invoice
 
 ### Control Structure
-### TBD
+Parsing Strings
+
+### Third TBD
