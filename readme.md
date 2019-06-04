@@ -6,6 +6,7 @@ A collection of project activities
 Automobile Service Invoice
 
 ### Control Structure
-Parsing Strings
+Drawing a Half Arrow
 
-### Third TBD
+### Control Structure and Parsing
+Parsing Strings
