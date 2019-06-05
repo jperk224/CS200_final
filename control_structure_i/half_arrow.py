@@ -1,24 +1,68 @@
-# This program outputs a downwards facing arrow composed of a rectangle and a right triangle. 
+# This program outputs a downwards facing half arrow composed of a rectangle and a right triangle
 # The arrow dimensions are defined by user specified 
 # arrow base height, arrow base width, and arrow head width.
 
 # Function Definitions
+# Three funcitons are defined
+# Draw the base of the arrow
+# Draw the head of the arrow
+# Draw the half arrow
+# Separate definitions are defined for clarity
+# Each function serves a separate purpose 
+# For loops are used for drawing as we know the number of iterations
+# based on the int arguments passed in
 
+def draw_base(height:int, width:int) -> str:
+    '''
+    Print ASCII Art for the arrow base
 
-# Grab and user defined dimenstions and assign them to reusable variables
+    Keyword arguments:
+    height -- an int representing the desired height
+    width -- an int representing the desired width
+    '''
+    # Draw arrow base (height = base_height, width = base_width)
+    for i in range(height):
+        print('*'*width)
+
+def draw_head(head_width:int) -> str:
+    '''
+    Print ASCII Art for the arrow head
+
+    Keyword arguments:
+    head_width -- an int representing the desired head width
+    '''
+    # Draw arrow head (head_width = largest width at head base)
+    for i in reversed(range(1, head_width + 1)):
+        print('*'*i)
+
+def draw_arrow(height:int, width:int, head_width:int) -> str:
+    '''
+    Print ASCII Art for the full half arrow
+
+    Keyword arguments:
+    height -- an int representing the desired height
+    width -- an int representing the desired width
+    head_width -- an int representing the desired head width
+    '''
+    # Draw half arrow (arrow base + arrow head)
+    draw_base(height, width)    
+    draw_head(head_width)
+
+# Grab user defined dimenstions and assign them to variables
+# these variables will serve as arguments for specific instances
+# of the functions defined above
+
 # Converting the string intput into int data types is best here for later iteration
-# The loops defined in the functions will not be able to iterate 
-# over strings or floats as currently defined
+# The loops defined in the functions will not iterate over strings or floats as currently defined
 
 base_height = int(input('Enter arrow base height: \n'))
 base_width = int(input('Enter arrow base width: \n'))
 head_width = int(input('Enter arrow head width: \n'))
 
+# A while loop is used to collect input to ensure 
+# head width is greater than base width to ensure arrow shape
+
 while (head_width <= base_width):
-    head_width = int(input('Enter arrow head width: \n'))
-# Draw arrow base (height = base_height, width = base_width)
-# Nested for loops used here; we know the number of iterations ahead of time
-for i in range(base_height):
-    print('*'*base_width)
-for i in reversed(range(1, head_width + 1)):
-    print('*'*i)
+    head_width = int(input('Head width must be greater than base width\nEnter arrow head width: \n'))
+
+draw_arrow(base_height, base_width, head_width)
