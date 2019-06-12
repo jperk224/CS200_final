@@ -59,16 +59,14 @@ while user_option != 'q':
     # Director:
     #    Title, Year
     if user_option == 'd':
-        # create the list of movie directors to iterate over
+        # initialize the list of movie directors to iterate over
         directors_list = []
         year_list.sort()
         year_list.reverse()
         for year_collection in movie_list:
             for film in year_collection:
                 directors_list.append(film[1])
-        directors_list.sort()
-        print(directors_list)
-        print(year_list)          
+        directors_list.sort()       
         for director in directors_list:
             print('%s:' % director)
             for year in year_list:
@@ -76,8 +74,23 @@ while user_option != 'q':
                     if (film[1] == director):
                         print('\t%s, %d' % (film[0], year))
     # implement the sort by title menu option
-    # Title
+    # Title:
     #    Director, Year
     if user_option == 't':
-        print(user_option)
+        # initialize the list of movie titles to iterate over
+        title_list = []
+        year_list.sort()
+        year_list.reverse()
+        for year_collection in movie_list:
+            for film in year_collection:
+                title_list.append(film[0])
+        title_list.sort()
+        print(title_list)
+        print(year_list)
+        for title in title_list:
+            print('%s:' % title)
+            for year in year_list:
+                for film in movie_collection[year]:
+                    if (film[0] == title):
+                        print('\t%s, %d' % (film[1], year))
     user_option = input('Choose an option: \n').lower().strip()
