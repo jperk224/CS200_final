@@ -37,6 +37,11 @@ options_menu = 'MENU\n' \
 print()
 print(options_menu)
 
+# initialize loop scope variables
+year_list = list(movie_collection.keys())
+movie_list = list(movie_collection.values())
+movie_tuples = list(movie_collection.items())
+
 user_option = input('Choose an option: \n').lower().strip()
 while user_option not in ['y', 'd', 't', 'q']:
     user_option = input('Choose an option: \n').lower().strip()
@@ -45,7 +50,6 @@ while user_option != 'q':
     # Year:
     #     Title, Director
     if user_option == 'y':
-        year_list = list(movie_collection.keys())
         for year in year_list:
             print('%d:' % year)
             for film in movie_collection[year]:
@@ -55,7 +59,12 @@ while user_option != 'q':
     # Director:
     #    Title, Year
     if user_option == 'd':
-        print(user_option)
+        # create the list of movie directors to iterate over
+        directors_list = []
+        for year_collection in movie_list:
+            for film in year_collection:
+                directors_list.append(film[1])
+        print(directors_list)          
     # implement the sort by title menu option
     # Title
     #    Director, Year
