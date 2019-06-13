@@ -75,11 +75,12 @@ while user_option != 'q':
         # initialize the list of movie directors to iterate over
         directors_list = []
         year_list.sort()
-        year_list.reverse()
+        # year_list.reverse()
         for year_collection in movie_list:
             for film in year_collection:
                 directors_list.append(film[1])
-        directors_list.sort()       
+        directors_list = list(set(directors_list))       
+        directors_list.sort()
         for director in directors_list:
             print('%s:' % director)
             for year in year_list:
@@ -100,8 +101,6 @@ while user_option != 'q':
             for film in year_collection:
                 title_list.append(film[0])
         title_list.sort()
-        print(title_list)
-        print(year_list)
         for title in title_list:
             print('%s:' % title)
             for year in year_list:
