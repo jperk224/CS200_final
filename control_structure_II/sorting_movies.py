@@ -9,8 +9,6 @@
 
 import movie_collection
 
-movie_collection = movie_collection.movie_collection
-
 # Define a funciton that prompts the user for a single year and output the movie title(s) and director(s) from that year. 
 # Loop until the user enters a valid year
 
@@ -31,80 +29,141 @@ def single_year_output(movie_collection:dict) -> str:
         print('\n%s, %s' % (film[0], film[1]))
     print()
 
-single_year_output(movie_collection)
-
-# Display a menu that enables a user to display the movies sorted by year, director, or movie title.
+# Define a function to display a menu that 
+# enables a user to display the movies sorted by year, director, or movie title.
 # Each option is represented by a single character.
 # If an invalid character is entered, continue to prompt for a valid choice.
 # The program ends when the user chooses the option to Quit
 
-options_menu = 'MENU\n' \
-               'Sort by:\n' \
-               'y - Year\n' \
-               'd - Director\n' \
-               't - Movie title\n' \
-               'q - Quit\n'
-# print()
-print(options_menu)
+def menu() -> list:
+    '''
+    Render a menu of options for the user and return a list containing the menu and action characters
+    '''
+    options_menu = 'MENU\n' \
+                'Sort by:\n' \
+                'y - Year\n' \
+                'd - Director\n' \
+                't - Movie title\n' \
+                'q - Quit\n'
+    print(options_menu)
+    # Return an array of letter options to be used as input to subsequent rendering functions
+    # This allows the menu to be modifed as needed
+    # This does assume the above menu format is adhered to --> single-char - action
+    options_list = options_menu.split()
+    option_letters = []
+    for string in options_list:
+        if((len(string) > 1) or string == '-'):
+            continue
+        else:
+            option_letters.append(string)
+    return([options_menu, option_letters])
 
-# initialize loop scope variables
-year_list = list(movie_collection.keys())
-movie_list = list(movie_collection.values())
-movie_tuples = list(movie_collection.items())
+# Define a function to render movie collections by year
 
-user_option = input('Choose an option:\n').lower().strip()
-while user_option not in ['y', 'd', 't', 'q']:
-    user_option = input('Choose an option:\n').lower().strip()
-while user_option != 'q':
+def render_by_year(year_list:list, movie_collection:dict) -> str:
+    '''
+    Render the movie collection grouped and ordered by year
+
+    Keyword arguments:
+    year_list -- a list representing all unique years in the movie collection
+    movie_collection -- a dict representing movie collections paired with unique year keys
+    '''
     # Implement the sort by year menu option
-    # Year:
-    #     Title, Director
-    if user_option == 'y':
-        for year in year_list:
-            print('%d:' % year)
-            for film in movie_collection[year]:
-                print('\t%s, %s' % (film[0], film[1]))
-            print()
+        # Year:
+        #     Title, Director
+    for year in year_list:
+        print('%d:' % year)
+        for film in movie_collection[year]:
+            print('\t%s, %s' % (film[0], film[1]))
+        print()
 
+# Define a function to render movie collections by director
+
+def render_by_director(year_list:list, movie_list:list, movie_collection:dict) -> str:
+    '''
+    Render the movie collection grouped by director and ordered by year
+
+    Keyword arguments:
+    year_list -- a list representing all unique years in the movie collection
+    movie_list -- a list representing movie lists containing title and director
+    movie_collection -- a dict representing movie collections paired with unique year keys
+    '''
     # Implement the sort by director menu option
     # For directors with multiple films on the list, order their films by year.
-    # Director:
-    #    Title, Year
-    if user_option == 'd':
-        # initialize the list of movie directors to iterate over
-        directors_list = []
-        year_list.sort()
-        for year_collection in movie_list:
-            for film in year_collection:
-                directors_list.append(film[1])
-        directors_list = list(set(directors_list))       
-        directors_list.sort()
-        for director in directors_list:
-            print('%s:' % director)
-            for year in year_list:
-                for film in movie_collection[year]:
-                    if (film[1] == director):
-                        print('\t%s, %d' % (film[0], year))
-            print()
+        # Director:
+        #    Title, Year
+   
+    # initialize the list of movie directors to iterate over
+    directors_list = []
+    year_list.sort()
+    for year_collection in movie_list:
+        for film in year_collection:
+            directors_list.append(film[1])
+    directors_list = list(set(directors_list))       
+    directors_list.sort()
+    for director in directors_list:
+        print('%s:' % director)
+        for year in year_list:
+            for film in movie_collection[year]:
+                if (film[1] == director):
+                    print('\t%s, %d' % (film[0], year))
+        print()
 
+# Define a function to render movie collections by title
+
+def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> str:
+    '''
+    Render the movie collection by title, ordered alphabetically
+
+    Keyword arguments:
+    year_list -- a list representing all unique years in the movie collection
+    movie_list -- a list representing movie lists containing title and director
+    movie_collection -- a dict representing movie collections paired with unique year keys
+    '''
     # implement the sort by title menu option
     # Title:
     #    Director, Year
+
+    # initialize the list of movie titles to iterate over
+    title_list = []
+    year_list.sort()
+    year_list.reverse()
+    for year_collection in movie_list:
+        for film in year_collection:
+            title_list.append(film[0])
+    title_list.sort()
+    for title in title_list:
+        print('%s:' % title)
+        for year in year_list:
+            for film in movie_collection[year]:
+                if (film[0] == title):
+                    print('\t%s, %d' % (film[1], year))
+        print()
+   
+# Run main program
+
+# initialize global scope variables
+movie_collection = movie_collection.movie_collection
+year_list = list(movie_collection.keys())
+movie_list = list(movie_collection.values())
+
+single_year_output(movie_collection)
+options_list = menu()[1]
+user_option = input('Choose an option:\n').lower().strip()
+
+# Loop until the user selects a valid entry
+while user_option not in options_list:
+    user_option = input('That is not a valid choice.  Choose an option:\n').lower().strip()
+
+# Loop until the user opts to quit
+while user_option != 'q':
+    if user_option == 'y':
+        render_by_year(year_list, movie_collection)
+    if user_option == 'd':
+        render_by_director(year_list, movie_list, movie_collection)
     if user_option == 't':
-        # initialize the list of movie titles to iterate over
-        title_list = []
-        year_list.sort()
-        year_list.reverse()
-        for year_collection in movie_list:
-            for film in year_collection:
-                title_list.append(film[0])
-        title_list.sort()
-        for title in title_list:
-            print('%s:' % title)
-            for year in year_list:
-                for film in movie_collection[year]:
-                    if (film[0] == title):
-                        print('\t%s, %d' % (film[1], year))
-            print()
-    print(options_menu)
+        render_by_title(year_list, movie_list, movie_collection)
+    options_list = menu()[1]
     user_option = input('Choose an option:\n').lower().strip()
+    while user_option not in options_list:
+        user_option = input('That is not a valid choice.  Choose an option:\n').lower().strip()
