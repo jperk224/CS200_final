@@ -1,3 +1,8 @@
+# Build a dictionary that contains the movie collection.
+# Since we'll be referencing movies primarily by year and dictionary keys must be unique,
+# each year's collection of movies is a list containing all movies associated with that year
+# Each individual movie is represented as a list containing the title and director
+
 movie_collection = {
     2005: [['Munich', 'Steven Spielberg']],
     2006: [['The Prestige', 'Christopher Nolan'], ['The Departed', 'Martin Scorsese']],

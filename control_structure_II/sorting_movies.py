@@ -1,16 +1,12 @@
-# Build a dictionary that contains the movie collection below. Hint: Combine movie title and director into a list.
-# Since we'll be referencing movies primarily by year and dictionary keys must be unique,
-# each year's collection of movies is a list containing all movies associated with that year
-# Each individual movie is represented as a list containing the title and director
-
 # The collection of movies is the data for this program 
 # and has been stored in a separate file 
-# for ease of and data maintainability
+# for ease of use and data maintainability
 
 import movie_collection
 
-# Define a funciton that prompts the user for a single year and output the movie title(s) and director(s) from that year. 
+# Define a function that prompts the user for a single year and outputs the movie title(s) and director(s) for that year. 
 # Loop until the user enters a valid year
+# A while loop is used becasue the number of iterations is unknown
 
 def single_year_output(movie_collection:dict) -> str:
     '''
@@ -30,9 +26,10 @@ def single_year_output(movie_collection:dict) -> str:
     print()
 
 # Define a function to display a menu that 
-# enables a user to display the movies sorted by year, director, or movie title.
+# enables the user to display the movies sorted by year, director, or movie title.
 # Each option is represented by a single character.
-# If an invalid character is entered, continue to prompt for a valid choice.
+# Continue to prompt the user for a valid choice if the first provided is invalid.
+# A while loop is used becasue the number of iterations is unknown
 # The program ends when the user chooses the option to Quit
 
 def menu() -> list:
@@ -46,9 +43,9 @@ def menu() -> list:
                 't - Movie title\n' \
                 'q - Quit\n'
     print(options_menu)
-    # Return an array of letter options to be used as input to subsequent rendering functions
+    # Return an array of letter options to be used as input validation for the main program
     # This allows the menu to be modifed as needed
-    # This does assume the above menu format is adhered to --> single-char - action
+    # This approach assumes the menu format is adhered to --> single-char - action
     options_list = options_menu.split()
     option_letters = []
     for string in options_list:
@@ -71,6 +68,7 @@ def render_by_year(year_list:list, movie_collection:dict) -> str:
     # Implement the sort by year menu option
         # Year:
         #     Title, Director
+        # For loops are used because the data structure defines the number of iterations
     for year in year_list:
         print('%d:' % year)
         for film in movie_collection[year]:
@@ -92,7 +90,8 @@ def render_by_director(year_list:list, movie_list:list, movie_collection:dict) -
     # For directors with multiple films on the list, order their films by year.
         # Director:
         #    Title, Year
-   
+        # For loops are used because the data structure defines the number of iterations
+
     # initialize the list of movie directors to iterate over
     directors_list = []
     year_list.sort()
@@ -123,6 +122,7 @@ def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> s
     # implement the sort by title menu option
     # Title:
     #    Director, Year
+    # For loops are used because the data structure defines the number of iterations
 
     # initialize the list of movie titles to iterate over
     title_list = []
@@ -142,28 +142,29 @@ def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> s
    
 # Run main program
 
-# initialize global scope variables
-movie_collection = movie_collection.movie_collection
-year_list = list(movie_collection.keys())
-movie_list = list(movie_collection.values())
+if __name__ == "__main__":
+    # initialize global scope variables
+    movie_collection = movie_collection.movie_collection
+    year_list = list(movie_collection.keys())
+    movie_list = list(movie_collection.values())
 
-single_year_output(movie_collection)
-options_list = menu()[1]
-user_option = input('Choose an option:\n').lower().strip()
-
-# Loop until the user selects a valid entry
-while user_option not in options_list:
-    user_option = input('That is not a valid choice.  Choose an option:\n').lower().strip()
-
-# Loop until the user opts to quit
-while user_option != 'q':
-    if user_option == 'y':
-        render_by_year(year_list, movie_collection)
-    if user_option == 'd':
-        render_by_director(year_list, movie_list, movie_collection)
-    if user_option == 't':
-        render_by_title(year_list, movie_list, movie_collection)
+    single_year_output(movie_collection)
     options_list = menu()[1]
     user_option = input('Choose an option:\n').lower().strip()
+
+    # Loop until the user selects a valid entry
     while user_option not in options_list:
         user_option = input('That is not a valid choice.  Choose an option:\n').lower().strip()
+
+    # Loop until the user opts to quit
+    while user_option != 'q':
+        if user_option == 'y':
+            render_by_year(year_list, movie_collection)
+        if user_option == 'd':
+            render_by_director(year_list, movie_list, movie_collection)
+        if user_option == 't':
+            render_by_title(year_list, movie_list, movie_collection)
+        options_list = menu()[1]
+        user_option = input('Choose an option:\n').lower().strip()
+        while user_option not in options_list:
+            user_option = input('That is not a valid choice.  Choose an option:\n').lower().strip()
