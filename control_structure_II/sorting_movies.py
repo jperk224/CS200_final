@@ -11,21 +11,27 @@ import movie_collection
 
 movie_collection = movie_collection.movie_collection
 
-# Prompt the user for a single year and output the movie title(s) and director(s) from that year. Output N/A if the year is invalid.
+# Define a funciton that prompts the user for a single year and output the movie title(s) and director(s) from that year. 
+# Loop until the user enters a valid year
 
-# initialize user's year selection and max and min key values
-min_year = min(list(movie_collection.keys()))
-max_year = max(list(movie_collection.keys()))
-user_year = int(input('Enter a year between 2005 and 2016:\n'))
-# while (user_year < min(list(movie_collection.keys()))) and (user_year > max(list(movie_collection.keys()))):
-#     user_year = int(input('Enter a year between '))
+def single_year_output(movie_collection:dict) -> str:
+    '''
+    Prompt the user for a year and output the associated movie collection.
 
-if (user_year < min_year) or (user_year > max_year):
-    print('N/A')
-else:
+    Keyword arguments:
+    movie_collection -- a dict representing movie collections paired with unique year keys
+    '''
+    # initialize the max and min years and user's year selection
+    min_year = min(list(movie_collection.keys()))
+    max_year = max(list(movie_collection.keys()))
+    user_year = int(input('Enter a year between %d and %d:\n' % (min_year, max_year)))
+    while (user_year < min(list(movie_collection.keys()))) or (user_year > max(list(movie_collection.keys()))):
+        user_year = int(input('That is not a valid entry.  Enter a year between %d and %d:\n' % (min_year, max_year)))
     for film in movie_collection[user_year]:
-        print('%s, %s' % (film[0], film[1]))
-print()
+        print('\n%s, %s' % (film[0], film[1]))
+    print()
+
+single_year_output(movie_collection)
 
 # Display a menu that enables a user to display the movies sorted by year, director, or movie title.
 # Each option is represented by a single character.
