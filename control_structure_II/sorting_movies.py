@@ -3,20 +3,13 @@
 # each year's collection of movies is a list containing all movies associated with that year
 # Each individual movie is represented as a list containing the title and director
 
-movie_collection = {
-    2005: [['Munich', 'Steven Spielberg']],
-    2006: [['The Prestige', 'Christopher Nolan'], ['The Departed', 'Martin Scorsese']],
-    2007: [['Into the Wild', 'Sean Penn']],
-    2008: [['The Dark Knight', 'Christopher Nolan']],
-    2009: [['Mary and Max', 'Adam Elliot']],
-    2010: [['The King\'s Speech', 'Tom Hooper']],
-    2011: [['The Artist', 'Michel Hazanavicius'], ['The Help', 'Tate Taylor']],
-    2012: [['Argo', 'Ben Affleck']],
-    2013: [['12 Years a Slave', 'Steve McQueen']],
-    2014: [['Birdman', 'Alejandro G. Inarritu']],
-    2015: [['Spotlight', 'Tom McCarthy']],
-    2016: [['The BFG', 'Steven Spielberg']]
-}
+# The collection of movies is the data for this program 
+# and has been stored in a separate file 
+# for ease of and data maintainability
+
+import movie_collection
+
+movie_collection = movie_collection.movie_collection
 
 # Prompt the user for a single year and output the movie title(s) and director(s) from that year. Output N/A if the year is invalid.
 
@@ -75,7 +68,6 @@ while user_option != 'q':
         # initialize the list of movie directors to iterate over
         directors_list = []
         year_list.sort()
-        # year_list.reverse()
         for year_collection in movie_list:
             for film in year_collection:
                 directors_list.append(film[1])
