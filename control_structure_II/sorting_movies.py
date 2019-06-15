@@ -26,7 +26,7 @@ def single_year_output(movie_collection:dict) -> str:
     while (user_year < min(list(movie_collection.keys()))) or (user_year > max(list(movie_collection.keys()))):
         user_year = int(input('That is not a valid entry.  Enter a year between %d and %d:\n' % (min_year, max_year)))
     for film in movie_collection[user_year]:
-        print('\n%s, %s' % (film[0], film[1]))
+        print('%s, %s' % (film[0], film[1]))
     print()
 
 # Define a function to display a menu that 
