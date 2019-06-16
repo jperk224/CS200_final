@@ -48,21 +48,24 @@ def draw_arrow(height:int, width:int, head_width:int) -> str:
     draw_base(height, width)    
     draw_head(head_width)
 
-# Grab user defined dimenstions and assign them to variables
-# these variables will serve as arguments for specific instances
-# of the functions defined above
+# Only execute if this is the main script run 
+# and script is not imported by another module
+if __name__ == "__main__":
+    # Grab user defined dimenstions and assign them to variables
+    # these variables will serve as arguments for specific instances
+    # of the functions defined above
 
-# Converting the string intput into int data types is best here for later iteration
-# The loops defined in the functions will not iterate over strings or floats as currently defined
+    # Converting the string intput into int data types is best here for later iteration
+    # The loops defined in the functions will not iterate over strings or floats as currently defined
 
-base_height = int(input('Enter arrow base height: \n'))
-base_width = int(input('Enter arrow base width: \n'))
-head_width = int(input('Enter arrow head width: \n'))
+    base_height = int(input('Enter arrow base height: \n'))
+    base_width = int(input('Enter arrow base width: \n'))
+    head_width = int(input('Enter arrow head width: \n'))
 
-# A while loop is used to collect input to ensure 
-# head width is greater than base width to ensure arrow shape
+    # A while loop is used to collect input to ensure 
+    # head width is greater than base width to ensure arrow shape
 
-while (head_width <= base_width):
-    head_width = int(input('Head width must be greater than base width\nEnter arrow head width: \n'))
+    while (head_width <= base_width):
+        head_width = int(input('Head width must be greater than base width\nEnter arrow head width: \n'))
 
-draw_arrow(base_height, base_width, head_width)
+    draw_arrow(base_height, base_width, head_width)
