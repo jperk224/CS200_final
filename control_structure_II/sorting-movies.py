@@ -1,26 +1,34 @@
-# The collection of movies is the data for this program 
-# and has been stored in a separate file 
-# for ease of use and data maintainability
+# The movie collection data for this program 
+# has been stored in a separate file 
+# for ease of use and data maintainability.
 
 import movie_collection
 
-# Define a function that prompts the user for a single year and outputs the movie title(s) and director(s) for that year. 
-# Loop until the user enters a valid year
-# A while loop is used becasue the number of iterations is unknown
+# Define a function that prompts the user for a single year 
+# and outputs the movie title(s) and director(s) for that year. 
+# Loop until the user enters a valid year within the range.
+# A while loop is used becasue the number of iterations is unknown.
 
 def single_year_output(movie_collection:dict) -> str:
     '''
     Prompt the user for a year and output the associated movie collection.
 
     Keyword arguments:
-    movie_collection -- a dict representing movie collections paired with unique year keys
+    movie_collection -- a dict representing movie collections paired with unique years
     '''
-    # initialize the max and min years and user's year selection
+    # initialize the max year, min year, and user's selected year.
+    
     min_year = min(list(movie_collection.keys()))
     max_year = max(list(movie_collection.keys()))
     user_year = int(input('Enter a year between %d and %d:\n' % (min_year, max_year)))
     while (user_year < min(list(movie_collection.keys()))) or (user_year > max(list(movie_collection.keys()))):
         user_year = int(input('That is not a valid entry.  Enter a year between %d and %d:\n' % (min_year, max_year)))
+    
+    # Find the list of movies for the given year.
+    # Loop through the list to print the title and director for each movie.
+    # A for loop is used beacuse the length of the list dict value 
+    # dictates the number of iterations.
+
     for film in movie_collection[user_year]:
         print('%s, %s' % (film[0], film[1]))
     print()
@@ -29,8 +37,8 @@ def single_year_output(movie_collection:dict) -> str:
 # enables the user to display the movies sorted by year, director, or movie title.
 # Each option is represented by a single character.
 # Continue to prompt the user for a valid choice if the first provided is invalid.
-# A while loop is used becasue the number of iterations is unknown
-# The program ends when the user chooses the option to Quit
+# A while loop is used becasue the number of iterations is unknown.
+# The program ends when the user chooses the option to quit.
 
 def menu() -> list:
     '''
@@ -43,11 +51,21 @@ def menu() -> list:
                 't - Movie title\n' \
                 'q - Quit\n'
     print(options_menu)
-    # Return an array of letter options to be used as input validation for the main program
-    # This allows the menu to be modifed as needed
+    
+    # Return a list of letter options to be used as input validation for the main program.
+    # Separate the options menu into a list of strings and use
+    # conditional logic to add only the single char menu options
+    # to the list being returned for main program iteration.
+    # This allows the menu to be modifed in future versions
+    # without affecting the main program.
     # This approach assumes the menu format is adhered to --> single-char - action
+    
     options_list = options_menu.split()
     option_letters = []
+
+    # A for loop is used becasue the length of the options list built from the
+    # menu string dictates the number of iterations.
+
     for string in options_list:
         if((len(string) > 1) or string == '-'):
             continue
