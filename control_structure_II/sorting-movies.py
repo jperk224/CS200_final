@@ -69,6 +69,7 @@ def render_by_year(year_list:list, movie_collection:dict) -> str:
         # Year:
         #     Title, Director
         # For loops are used because the data structure defines the number of iterations
+    year_list.sort()
     for year in year_list:
         print('%d:' % year)
         for film in movie_collection[year]:
