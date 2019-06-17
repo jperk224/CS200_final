@@ -7,9 +7,11 @@
 # Draw the base of the arrow.
 # Draw the head of the arrow.
 # Draw the half arrow.
-# Separate definitions are defined for clarity.
-# Each function serves a separate, single purpose .
+# Separate functions are defined for clarity.
+# Each function serves a separate, single purpose.
 # For loops are used for drawing as the parameters dictate the number of iterations.
+# When the number of iterations is known, for loops are preferable to while loops
+# to eliminate the risk of entering an infinite loop.
 
 def draw_base(height:int, width:int) -> str:
     '''

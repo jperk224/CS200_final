@@ -17,7 +17,7 @@ import inflect
 
 ordinal = inflect.engine()
 
-# A dict type is the best data type for the availabe services.  
+# A dict type is the best data type for the available services.  
 # The dict yields an associative relationship between service and price.
 # and allows for changing prices and adding services, as dicts are mutable.
 # Floats are used for the dict values as
@@ -30,6 +30,10 @@ services = {
     'Car wash': 7.00,
     'Car wax': 12.00
 }
+
+# Function Definitions
+# Separate functions are defined for clarity.
+# Each function serves a separate, single purpose.
 
 # Declare a funciton to loop through the dict of services to output 
 # a menu of automotive services and the corresponding cost of each service.
