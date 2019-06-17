@@ -202,21 +202,31 @@ def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> s
 
 if __name__ == "__main__":
     
-    # initialize global scope variables
+    # Initialize global variables.
+    # Global variables are initlized so they can
+    # be used as arguments for subsequent functions in the main program.
     
     movie_collection = movie_collection.movie_collection
     year_list = list(movie_collection.keys())
     movie_list = list(movie_collection.values())
 
     single_year_output(movie_collection)
+    
+    # Capture the list of avaiable menu chars for the user to take action on.
+
     options_list = menu()[1]
+
     user_option = input('Choose an option:\n').lower().strip()
 
     # Loop until the user selects a valid entry
+    # A while loop is used because the number of iterations is unknown.
+
     while user_option not in options_list:
         user_option = input('That is not a valid choice.  Choose an option:\n').lower().strip()
 
     # Loop until the user opts to quit
+    # A while loop is used because the number of iterations is unknown.
+
     while user_option != 'q':
         if user_option == 'y':
             render_by_year(year_list, movie_collection)
