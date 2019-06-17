@@ -73,7 +73,7 @@ def menu() -> list:
             option_letters.append(string)
     return([options_menu, option_letters])
 
-# Define a function to render movie collections by year
+# Define a function to render movie collections by year.
 
 def render_by_year(year_list:list, movie_collection:dict) -> str:
     '''
@@ -83,10 +83,13 @@ def render_by_year(year_list:list, movie_collection:dict) -> str:
     year_list -- a list representing all unique years in the movie collection
     movie_collection -- a dict representing movie collections paired with unique year keys
     '''
-    # Implement the sort by year menu option
+    # Implement the sort by year menu option.
         # Year:
         #     Title, Director
-        # For loops are used because the data structure defines the number of iterations
+    # For loops are used because the data structure defines the number of iterations,
+    # as the global variable year_list has a fixed length.
+    # Sort the list of years to ensure output is in chronological order.
+    
     year_list.sort()
     for year in year_list:
         print('%d:' % year)
@@ -94,7 +97,7 @@ def render_by_year(year_list:list, movie_collection:dict) -> str:
             print('\t%s, %s' % (film[0], film[1]))
         print()
 
-# Define a function to render movie collections by director
+# Define a function to render movie collections by director.
 
 def render_by_director(year_list:list, movie_list:list, movie_collection:dict) -> str:
     '''
@@ -105,20 +108,40 @@ def render_by_director(year_list:list, movie_list:list, movie_collection:dict) -
     movie_list -- a list representing movie lists containing title and director
     movie_collection -- a dict representing movie collections paired with unique year keys
     '''
-    # Implement the sort by director menu option
+    # Implement the sort by director menu option.
     # For directors with multiple films on the list, order their films by year.
         # Director:
         #    Title, Year
-        # For loops are used because the data structure defines the number of iterations
+    # For loops are used because the data structures
+    # for the function arguments define the number of iterations.
 
     # initialize the list of movie directors to iterate over
+    
     directors_list = []
+    
+    # Sort the list of years to ensure output is in chronological order.
+    
     year_list.sort()
+    
     for year_collection in movie_list:
         for film in year_collection:
             directors_list.append(film[1])
+
+    # Converting the resulting list to a set ensures only unique elements for director names.  
+    # The set is then converted back to a list for subsequent iteration.
+
     directors_list = list(set(directors_list))       
+
+    # Sort the list of directors to ensure output is in alphabetical order.
+
     directors_list.sort()
+
+    # Nested for loops are used here.
+    # For each director, iterate over the list of years.
+    # For each year, iterate over the movie collection associated with that year
+    # to see if there is a film directed by the main iteration's director.
+    # If a match is found, render the movie and year.
+
     for director in directors_list:
         print('%s:' % director)
         for year in year_list:
@@ -127,7 +150,7 @@ def render_by_director(year_list:list, movie_list:list, movie_collection:dict) -
                     print('\t%s, %d' % (film[0], year))
         print()
 
-# Define a function to render movie collections by title
+# Define a function to render movie collections by title.
 
 def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> str:
     '''
@@ -138,19 +161,34 @@ def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> s
     movie_list -- a list representing movie lists containing title and director
     movie_collection -- a dict representing movie collections paired with unique year keys
     '''
-    # implement the sort by title menu option
+    # Implement the sort by title menu option.
     # Title:
     #    Director, Year
-    # For loops are used because the data structure defines the number of iterations
+    # For loops are used because the data structure defines the number of iterations.
 
-    # initialize the list of movie titles to iterate over
+    # Initialize the list of movie titles to iterate over.
+
     title_list = []
-    year_list.sort()
-    year_list.reverse()
+
+    # In the main program, movie_list is a list of nested list elements representing
+    # the collection of movies for each year in the main dict the global list is derived from.
+    # Iterate over the list.  For each iteration, further iterate over that year's 
+    # list of movies to extract the title for rendering.  
+
     for year_collection in movie_list:
         for film in year_collection:
             title_list.append(film[0])
+    
+    # Sort the list of titles for alphabetical rendering.
+
     title_list.sort()
+
+    # Nested for loops are used to render the appropriate data as output.
+    # For each move title in the list of movie titles,
+    # iterate over every year in the global list of years and
+    # check if the movie colleciton for the given iteration's year
+    # contains the movie title for the main iteration's title.
+
     for title in title_list:
         print('%s:' % title)
         for year in year_list:
@@ -159,10 +197,13 @@ def render_by_title(year_list:list, movie_list:list, movie_collection:dict) -> s
                     print('\t%s, %d' % (film[1], year))
         print()
    
-# Run main program
+# Only execute the main program if this is the main script run 
+# and the script is not imported by another module
 
 if __name__ == "__main__":
+    
     # initialize global scope variables
+    
     movie_collection = movie_collection.movie_collection
     year_list = list(movie_collection.keys())
     movie_list = list(movie_collection.values())
